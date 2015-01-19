@@ -1257,7 +1257,7 @@ const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo)
 
 int64 GetBlockValue(int nHeight, int64_t nFees)
 {
-    int64 nSubsidy = 0 * COIN;
+    int64_t nSubsidy = 0 * COIN;
 
     if(nHeight == 1)   
                         nSubsidy = 1000000000 * COIN;
@@ -1385,17 +1385,9 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
 
         PastBlocksMass++;
 
-        if (i == 1) {
-            PastDifficultyAverage.SetCompact(BlockReading->nBits);
-        } else {
-            BlockReadingDifficulty.SetCompact(BlockReading->nBits);
-            if (BlockReadingDifficulty > PastDifficultyAveragePrev) {
-                PastDifficultyAverage = PastDifficultyAveragePrev + ((BlockReadingDifficulty - PastDifficultyAveragePrev) / i);
-            } else {
-                PastDifficultyAverage = PastDifficultyAveragePrev - ((PastDifficultyAveragePrev - BlockReadingDifficulty) / i);
-            }
-        }
-        PastDifficultyAveragePrev = PastDifficultyAverage;
+         if (i == 1)        { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
+                else                { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
+                PastDifficultyAveragePrev = PastDifficultyAverage;
 
         if (LatestBlockTime < BlockReading->GetBlockTime()) {
                 LatestBlockTime = BlockReading->GetBlockTime();
