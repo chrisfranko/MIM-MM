@@ -16,6 +16,7 @@
 #include "txdb.h"
 #include "txmempool.h"
 #include "ui_interface.h"
+#include "uint256.h"
 #include "util.h"
 
 #include <sstream>
