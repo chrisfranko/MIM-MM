@@ -515,7 +515,7 @@ public:
 					scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
 					return thash;
 				}
-			case ALGO_SHA26D:
+			case ALGO_SHA256D:
 				return Hash(BEGIN(nVersion), END(nNonce));
             case ALGO_BLAKE:
                 return HashBlake(BEGIN(nVersion), END(nNonce));
