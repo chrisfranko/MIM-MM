@@ -1347,17 +1347,16 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
     double               EventHorizonDeviation;
     double               EventHorizonDeviationFast;
     double               EventHorizonDeviationSlow;
+	static const int64_t TargetBlockSpacing              = 30; // == 1 minute
+	unsigned int         TimeDaySeconds                  = 60 * 60 * 24;
+	int64_t              PastSecondsMin                  = TimeDaySeconds * 0.01; // == 6300 Seconds
+	int64_t              PastSecondsMax                  = TimeDaySeconds * 0.14; // == 604800 Seconds
 
 	if(BlockReading->nHeight >= NEW_BLOCK_TARGET){
 		static const int64_t TargetBlockSpacing              = 7*60; // == 1 minute
 		unsigned int         TimeDaySeconds                  = 60 * 60 * 24;
 		int64_t              PastSecondsMin                  = TimeDaySeconds * 0.25; // == 6300 Seconds
 		int64_t              PastSecondsMax                  = TimeDaySeconds * 7; // == 604800 Seconds
-	}else{
-		static const int64_t TargetBlockSpacing              = 30; // == 1 minute
-		unsigned int         TimeDaySeconds                  = 60 * 60 * 24;
-		int64_t              PastSecondsMin                  = TimeDaySeconds * 0.01; // == 6300 Seconds
-		int64_t              PastSecondsMax                  = TimeDaySeconds * 0.14; // == 604800 Seconds
 	}
     uint64_t             PastBlocksMin                   = PastSecondsMin / TargetBlockSpacing; // == 360 blocks
     uint64_t             PastBlocksMax                   = PastSecondsMax / TargetBlockSpacing; // == 10080 blocks
