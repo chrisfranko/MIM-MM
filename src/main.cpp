@@ -1255,7 +1255,7 @@ const CBlockIndex* GetLastBlockIndexForAlgo(const CBlockIndex* pindex, int algo)
     }
 }
 
-int64 GetBlockValue(int nHeight, int64_t nFees)
+int64_t GetBlockValue(int nHeight, int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
 
