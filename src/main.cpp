@@ -16,7 +16,6 @@
 #include "txdb.h"
 #include "txmempool.h"
 #include "ui_interface.h"
-#include "uint256.h"
 #include "util.h"
 
 #include <sstream>
@@ -1342,9 +1341,9 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
     int64_t              PastRateActualSeconds           = 0;
     int64_t              PastRateTargetSeconds           = 0;
     double               PastRateAdjustmentRatio         = double(1);
-    uint256              PastDifficultyAverage;
-    uint256              PastDifficultyAveragePrev;
-    uint256              BlockReadingDifficulty;
+    CBigNum               PastDifficultyAverage;
+    CBigNum               PastDifficultyAveragePrev;
+    CBigNum               BlockReadingDifficulty;
     double               EventHorizonDeviation;
     double               EventHorizonDeviationFast;
     double               EventHorizonDeviationSlow;
@@ -1426,7 +1425,7 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
         BlockReading = BlockReading->pprev;
     }
 
-    uint256 bnNew(PastDifficultyAverage);
+    CBigNum bnNew(PastDifficultyAverage);
     if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
         bnNew *= PastRateActualSeconds;
         bnNew /= PastRateTargetSeconds;
@@ -1439,7 +1438,7 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
     
     LogPrintf("PastRateAdjustmentRatio =  %g    PastRateTargetSeconds = %d    PastRateActualSeconds = %d\n",
                PastRateAdjustmentRatio, PastRateTargetSeconds, PastRateActualSeconds);
-    LogPrintf("Before: %08x  %s\n", BlockLastSolved->nBits, uint256().SetCompact(BlockLastSolved->nBits).ToString());
+    LogPrintf("Before: %08x  %s\n", BlockLastSolved->nBits, CBigNum().SetCompact(BlockLastSolved->nBits).getuint256().ToString());
     LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.ToString());
 
     return bnNew.GetCompact();
