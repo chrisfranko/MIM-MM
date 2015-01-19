@@ -18,8 +18,8 @@
 #include <stdint.h>
 
 enum {
-	ALGO_SCRYPT= 0;
-	ALGO_SHA256D = 1;
+	ALGO_SCRYPT= 0,
+	ALGO_SHA256D = 1,
     ALGO_BLAKE = 2,
     ALGO_SKEIN = 3,
     ALGO_QUBIT = 4,
