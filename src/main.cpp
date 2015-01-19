@@ -1353,10 +1353,10 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
 	int64_t              PastSecondsMax                  = TimeDaySeconds * 0.14; // == 604800 Seconds
 
 	if(BlockReading->nHeight >= NEW_BLOCK_TARGET){
-		static const int64_t TargetBlockSpacing              = 7*60; // == 1 minute
-		unsigned int         TimeDaySeconds                  = 60 * 60 * 24;
-		int64_t              PastSecondsMin                  = TimeDaySeconds * 0.25; // == 6300 Seconds
-		int64_t              PastSecondsMax                  = TimeDaySeconds * 7; // == 604800 Seconds
+		TargetBlockSpacing              = 7*60; // == 1 minute
+		TimeDaySeconds                  = 60 * 60 * 24;
+		PastSecondsMin                  = TimeDaySeconds * 0.25; // == 6300 Seconds
+		PastSecondsMax                  = TimeDaySeconds * 7; // == 604800 Seconds
 	}
     uint64_t             PastBlocksMin                   = PastSecondsMin / TargetBlockSpacing; // == 360 blocks
     uint64_t             PastBlocksMax                   = PastSecondsMax / TargetBlockSpacing; // == 10080 blocks
@@ -1372,7 +1372,7 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 ||
         (uint64_t)BlockLastSolved->nHeight < PastBlocksMin ||
-			AlgoCounter < PastBlockMin) {
+			AlgoCounter < PastBlocksMin) {
         return Params().ProofOfWorkLimit(algo).GetCompact();
     }
     
