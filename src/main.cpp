@@ -1347,7 +1347,7 @@ unsigned int KimotoGravityWell(const CBlockIndex* pindexLast, int algo) {
     double               EventHorizonDeviation;
     double               EventHorizonDeviationFast;
     double               EventHorizonDeviationSlow;
-	static const int64_t TargetBlockSpacing              = 30; // == 1 minute
+	int64_t TargetBlockSpacing              = 30; // == 1 minute
 	unsigned int         TimeDaySeconds                  = 60 * 60 * 24;
 	int64_t              PastSecondsMin                  = TimeDaySeconds * 0.01; // == 6300 Seconds
 	int64_t              PastSecondsMax                  = TimeDaySeconds * 0.14; // == 604800 Seconds
