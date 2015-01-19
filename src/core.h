@@ -9,6 +9,7 @@
 #include "script.h"
 #include "serialize.h"
 #include "uint256.h"
+#include "scrypt.h"
 #include "hashskein.h"
 #include "hashqubit.h"
 #include "hashblake.h"
